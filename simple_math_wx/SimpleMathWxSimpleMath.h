@@ -167,14 +167,14 @@ protected:
 		while (!GetThread()->TestDestroy())
 		{
 			char buffer[1024] = { 0 };
-			wxThread::Sleep(1000);
+			wxThread::Sleep(100);
 			{
 				wxCriticalSectionLocker lock(m_dataCS);
 				memcpy(m_data, buffer, 1024);
 				offset++;
 			}
 			wxQueueEvent(GetEventHandler(),new wxThreadEvent());
-			if(offset > 10)
+			if(offset > 10000)
 			{
 				break;
 			}
@@ -226,17 +226,12 @@ public:
 		: SimpleMath(parent)
 	{
 		Bind(wxEVT_THREAD, &SimpleMathWxSimpleMath::OnThreadUpdate, this);
+		Bind(wxEVT_CLOSE_WINDOW, &SimpleMathWxSimpleMath::OnClose, this);
 		prepareNewExam();
 		//DoStartALongTask();
 	}
 
 	//// end generated class members
-	wxDECLARE_EVENT_TABLE();
 };
-
-wxBEGIN_EVENT_TABLE(SimpleMathWxSimpleMath, wxFrame)
-	EVT_CLOSE(SimpleMathWxSimpleMath::OnClose)
-wxEND_EVENT_TABLE()
-
 
 #endif // __SimpleMathWxSimpleMath__
