@@ -44,9 +44,9 @@ SimpleMath::SimpleMath( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_notifyText = new wxStaticText( this, wxID_ANY, wxT("Right!"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER_HORIZONTAL|wxST_NO_AUTORESIZE );
+	m_notifyText = new wxStaticText( this, wxID_ANY, wxT("Score: 100"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER_HORIZONTAL|wxST_NO_AUTORESIZE );
 	m_notifyText->Wrap( -1 );
-	m_notifyText->SetFont( wxFont( 30, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
+	m_notifyText->SetFont( wxFont( 26, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
 
 	bSizer2->Add( m_notifyText, 1, wxALL|wxEXPAND, 5 );
 
@@ -62,6 +62,7 @@ SimpleMath::SimpleMath( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_questionNumber = new wxStaticText( this, wxID_ANY, wxT("No. 30"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_questionNumber->Wrap( -1 );
 	m_questionNumber->SetFont( wxFont( 18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
+	m_questionNumber->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_INFOTEXT ) );
 
 	bSizer41->Add( m_questionNumber, 1, wxALL|wxEXPAND, 5 );
 
