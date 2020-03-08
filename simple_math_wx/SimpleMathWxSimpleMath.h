@@ -103,11 +103,16 @@ protected:
 			return;
 		}
 		auto user_answer = m_answerText->GetValue();
+		if(user_answer.empty())
+		{
+			return;
+		}
 		long user_answer_l = 0;
 		if (!user_answer.ToLong(&user_answer_l, 10))
 		{
-			score--;
-			m_notifyText->SetLabelText("Wrong!");
+			// score--;
+			// m_notifyText->SetLabelText("Wrong!");
+			return;
 		}
 		else
 		{
@@ -150,6 +155,7 @@ protected:
 			m_notifyText->SetLabelText("");
 			m_eximTimer.Start(1000);
 			new_question();
+			m_answerText->SetFocus();
 		}
 	}
 
