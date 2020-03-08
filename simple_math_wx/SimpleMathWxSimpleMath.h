@@ -15,9 +15,9 @@ class SimpleMathWxSimpleMath : public SimpleMath, public wxThreadHelper
 {
 private:
 
-	char m_data[1024 * 64] = { 0 };
+	char m_data[1024 * 64] = {0};
 	wxCriticalSection m_dataCS;
-	
+
 	const int total_questions = 100;
 	int score = total_questions;
 
@@ -73,8 +73,6 @@ private:
 	}
 
 protected:
-
-	
 	void prepareNewExam()
 	{
 		started = false;
@@ -161,26 +159,28 @@ protected:
 		auto timeUsedText = wxString::Format("Time: %d S", (int)(now - start_time));
 		m_timeUsed->SetLabel(timeUsedText);
 	}
+
 	wxThread::ExitCode Entry() override
 	{
 		int offset = 0;
 		while (!GetThread()->TestDestroy())
 		{
-			char buffer[1024] = { 0 };
+			char buffer[1024] = {0};
 			wxThread::Sleep(100);
 			{
 				wxCriticalSectionLocker lock(m_dataCS);
 				memcpy(m_data, buffer, 1024);
 				offset++;
 			}
-			wxQueueEvent(GetEventHandler(),new wxThreadEvent());
-			if(offset > 10000)
+			wxQueueEvent(GetEventHandler(), new wxThreadEvent());
+			if (offset > 10000)
 			{
 				break;
 			}
 		}
 		return (wxThread::ExitCode)nullptr;
 	}
+
 public:
 	void DoStartALongTask()
 	{
@@ -205,7 +205,7 @@ public:
 		}
 		Destroy();
 	}
-	
+
 	void OnThreadUpdate(wxThreadEvent& evt)
 	{
 		{
@@ -216,11 +216,7 @@ public:
 		auto questionNumberText = wxString::Format("No. %d", questions + 1);
 		m_questionNumber->SetLabel(questionNumberText);
 	}
-	
-	void startNewWorkerThread()
-	{
-		
-	}
+
 	/** Constructor */
 	explicit SimpleMathWxSimpleMath(wxWindow* parent)
 		: SimpleMath(parent)
